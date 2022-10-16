@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spike
   - TutorialEnd
+  - Enemy
   layers:
   - Default
   - TransparentFX
