@@ -7,6 +7,8 @@ TagManager:
   - Spike
   - TutorialEnd
   - Enemy
+  - Goal
+  - Pit
   layers:
   - Default
   - TransparentFX
