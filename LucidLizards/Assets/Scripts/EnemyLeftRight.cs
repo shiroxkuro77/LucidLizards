@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyLeftRight : MonoBehaviour
 {
     public Rigidbody2D enemyRigidBody2D;
-    public int UnitsToMove;
+    public float UnitsToMove;
     public float EnemySpeed;
     public bool _isFacingRight;
     private float _startPos;
