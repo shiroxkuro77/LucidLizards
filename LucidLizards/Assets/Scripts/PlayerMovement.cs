@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
   private bool grounded;
   public Transform checkpoint;
   public GameObject gbCheckpoint;
+    public GameObject blood;
 
     private void Awake()
   {
@@ -48,6 +50,12 @@ public class PlayerMovement : MonoBehaviour
         {
             gbCheckpoint.transform.position = new Vector3(transform.position.x, transform.position.y, gbCheckpoint.transform.position.z);
         }
+
+        if (Input.GetKeyDown("x")) 
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
 
   private void jump()
@@ -63,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         grounded = true;
 
     if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Spike") || collision.gameObject.CompareTag("Pit")) {
-            Die();
+            StartCoroutine(Die());
         }
 
     if (collision.gameObject.CompareTag("Goal"))
@@ -73,8 +81,18 @@ public class PlayerMovement : MonoBehaviour
 
   }
 
-   private void Die() {
+   private IEnumerator Die() {
 
+        Vector3 currPostion = transform.position;
+        //Destroy(gameObject, 2f);
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        Instantiate(blood, currPostion, Quaternion.identity);
+        yield return new WaitForSeconds(2);
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         transform.position = new Vector3(gbCheckpoint.transform.position.x, gbCheckpoint.transform.position.y, transform.position.z);
         body.velocity = new Vector2(body.velocity.x, jumpSpeed/2);
 

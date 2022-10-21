@@ -151,6 +151,7 @@ MonoBehaviour:
   jumpSpeed: 18
   checkpoint: {fileID: 0}
   gbCheckpoint: {fileID: 0}
+  blood: {fileID: 5776381159762391875, guid: 5fb4bcb3052ab4642bd9bc82febee91d, type: 3}
 --- !u!95 &8049404271031352727
 Animator:
   serializedVersion: 4
