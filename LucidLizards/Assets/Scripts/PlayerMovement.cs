@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         gameObject.GetComponent<Collider2D>().enabled = false;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         Instantiate(blood, currPostion, Quaternion.identity);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
         gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
