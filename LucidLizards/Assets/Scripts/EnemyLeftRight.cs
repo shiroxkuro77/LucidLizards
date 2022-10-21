@@ -55,5 +55,4 @@ public class EnemyLeftRight : MonoBehaviour
         _isFacingRight = transform.localScale.x > 0;
     }
 
-
 }

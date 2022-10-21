@@ -9,39 +9,46 @@ public class PlayerMovement : MonoBehaviour
   [SerializeField] private float jumpSpeed;
   private Animator anim;
   private bool grounded;
+  public Transform checkpoint;
+  public GameObject gbCheckpoint;
 
-  private void Awake()
+    private void Awake()
   {
     //Grab references for rigidbody and animator from obj
       body = GetComponent<Rigidbody2D>();
       anim  = GetComponent<Animator>();
   }
 
-  private void Update()
-  {
-      float horizontalInput = Input.GetAxis("Horizontal");
-      body.velocity = new Vector2(horizontalInput * speed,body.velocity.y);
+    private void Update()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
 
 
-      //Flip player when moving right/left
-      if (horizontalInput > .01f)
-          transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
-      else if (horizontalInput < -.01f)
-          transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
+        //Flip player when moving right/left
+        if (horizontalInput > .01f)
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
+        else if (horizontalInput < -.01f)
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
 
-      if (Input.GetKey(KeyCode.Space) && grounded)
-      {
-          jump();
+        if (Input.GetKey(KeyCode.Space) && grounded)
+        {
+            jump();
 
-      }
+        }
 
 
-      //set anim paramaters
-      anim.SetBool("run", horizontalInput != 0);
-      anim.SetBool("grounded", grounded);
+        //set anim paramaters
+        anim.SetBool("run", horizontalInput != 0);
+        anim.SetBool("grounded", grounded);
 
-  }
+        //Set new checkpoint
+        if (Input.GetKeyDown("z"))
+        {
+            gbCheckpoint.transform.position = new Vector3(transform.position.x, transform.position.y, gbCheckpoint.transform.position.z);
+        }
+    }
 
   private void jump()
   {
@@ -68,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
 
    private void Die() {
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transform.position = new Vector3(gbCheckpoint.transform.position.x, gbCheckpoint.transform.position.y, transform.position.z);
         
     }
 
