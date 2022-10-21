@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("grounded", grounded);
 
         //Set new checkpoint
-        if (Input.GetKeyDown("z"))
+        if (Input.GetKeyDown("z") && grounded)
         {
             gbCheckpoint.transform.position = new Vector3(transform.position.x, transform.position.y, gbCheckpoint.transform.position.z);
         }
@@ -76,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
    private void Die() {
 
         transform.position = new Vector3(gbCheckpoint.transform.position.x, gbCheckpoint.transform.position.y, transform.position.z);
-        
+        body.velocity = new Vector2(body.velocity.x, jumpSpeed/2);
+
     }
 
 
