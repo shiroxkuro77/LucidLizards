@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyLeftRight : MonoBehaviour
@@ -13,6 +14,7 @@ public class EnemyLeftRight : MonoBehaviour
     private float _endPos;
 
     public bool _moveRight = true;
+    private Animator anim;
 
     // Use this for initialization
     public void Awake()
@@ -21,6 +23,7 @@ public class EnemyLeftRight : MonoBehaviour
         _startPos = transform.position.x;
         _endPos = _startPos + UnitsToMove;
         _isFacingRight = transform.localScale.x > 0;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -46,6 +49,9 @@ public class EnemyLeftRight : MonoBehaviour
         if (enemyRigidBody2D.position.x <= _startPos)
             _moveRight = true;
 
+        
+        anim.SetBool("isMoving", Math.Abs(enemyRigidBody2D.velocity.x) > 0);
+        
 
     }
 

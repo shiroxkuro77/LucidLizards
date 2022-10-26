@@ -10,12 +10,14 @@ public class EnemyJump : MonoBehaviour
     private float _startPos;
 
     public bool _isGrounded = true;
+    private Animator anim;
 
     // Use this for initialization
     public void Awake()
     {
         enemyRigidBody2D = GetComponent<Rigidbody2D>();
         _startPos = transform.position.y;
+        anim = GetComponent<Animator>();
     }
 
     public void FixedUpdate()
@@ -33,7 +35,11 @@ public class EnemyJump : MonoBehaviour
         else {
             _isGrounded = false;
         }
-            
+
+        print(enemyRigidBody2D.velocity.x);
+        anim.SetBool("isMoving", Math.Abs(enemyRigidBody2D.velocity.x) > 0);
+
     }
+
 
 }
