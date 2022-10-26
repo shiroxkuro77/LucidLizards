@@ -36,7 +36,6 @@ public class EnemyJump : MonoBehaviour
             _isGrounded = false;
         }
 
-        print(enemyRigidBody2D.velocity.x);
         anim.SetBool("isMoving", Math.Abs(enemyRigidBody2D.velocity.x) > 0);
 
     }
